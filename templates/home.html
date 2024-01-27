@@ -1,9 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/trending.png' %}" />
     <title>TODO LIST - Home</title>
 
     <!-- Bootstrap -->
@@ -20,7 +22,7 @@
 </head>
 <body>
     <div class="container">
-        <h3 class="pt-5 text-center">Django ToDo App</h3>
+            <h3 class="pt-5 text-center">Django ToDo App</h3>
         
         <div class="row">
             <div class="col-md-12">
@@ -35,11 +37,11 @@
                     {% for task in tasks %}
                     <div class="card mb-1">
                         <div class="card-body">
-                            {{ task.task }}
+                            {{ task.task }} 
                             <span class="float-end">
-                                <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Mark as Done</a>
-                                <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                <a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                <a href="{% url 'markDone' task.pk %}" class="btn btn-success"><i class="fa fa-check"></i> Mark as Done</a>
+                                <a href="{% url 'delTask' task.id  %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                <a href="{% url 'editTask' task.pk %}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                             </span>
                         </div>
                     </div>
@@ -49,11 +51,17 @@
             <br>
             <div class="col-md-5">
                 <h5>Completed Tasks</h5>
+                <!-- -->
+                {% for task in task_Done %}
                 <div class="card mb-1">
                     <div class="card-body">
-                        This is the completed task.
+                        {{ task.task }} 
+                        <span class="float-end">
+                            <a href="{% url 'markUnDone' task.pk %}"><i class="fa fa-times" style="color:black"> UnDone</i></a>
+                        </span>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
         <div class="row">
@@ -68,5 +76,8 @@
             </div>
         </div>
     </div>
+
+
+
 </body>
 </html>

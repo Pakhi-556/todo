@@ -118,6 +118,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+#Y included #for connect static file in django
+STATIC_ROOT = BASE_DIR /'static'
+#list of folder
+STATICFILES_DIRS = [
+   'todo_main/static',
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
